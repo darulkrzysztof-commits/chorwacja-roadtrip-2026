@@ -197,11 +197,70 @@ a.act:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .tip{margin-top:24px;padding:22px 26px;font-size:.95rem;line-height:1.6;color:var(--ink-soft)}
 .tip strong{color:var(--ink)}
 
+/* ===== moodboard ===== */
+.mtabs{display:inline-flex;gap:6px;padding:7px;border-radius:100px;margin-bottom:24px}
+.mtabs button{
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.92rem;color:var(--ink);
+  padding:11px 22px;border-radius:100px;border:0;background:transparent;cursor:pointer;
+  transition:background .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.mtabs button:hover{transform:translateY(-1px)}
+.mtabs button.on{
+  background:rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 2px rgba(10,40,60,.08);
+}
+.mb{columns:3;column-gap:16px}
+@media(max-width:860px){.mb{columns:2}}
+@media(max-width:480px){.mb{columns:2;column-gap:12px}}
+.mb-pane{display:none}
+.mb-pane.on{display:block}
+.tile{
+  display:block;text-decoration:none;break-inside:avoid;margin-bottom:16px;
+  border-radius:26px;overflow:hidden;position:relative;
+  box-shadow:0 14px 30px rgba(8,40,60,.3), inset 0 1px 0 rgba(255,255,255,.4);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+.tile:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 22px 44px rgba(8,40,60,.42)}
+.tile .art{display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.tile .art::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 60% at 15% 0%, rgba(255,255,255,.4) 0%, transparent 50%);}
+.t-s .art{height:140px}
+.t-m .art{height:195px}
+.t-l .art{height:250px}
+.tile .cap{
+  position:absolute;left:10px;right:10px;bottom:10px;
+  padding:10px 14px;border-radius:18px;
+  background:rgba(255,255,255,.30);
+  backdrop-filter:blur(12px) saturate(160%);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 0 0 1px rgba(255,255,255,.2);
+}
+.tile .cap b{display:block;font-family:'Outfit',sans-serif;font-weight:800;font-size:.92rem;color:var(--ink)}
+.tile .cap span{font-size:.76rem;color:var(--ink-soft);line-height:1.35;display:block;margin-top:2px}
+.tile .cap em{font-style:normal;font-size:.7rem;font-weight:700;color:var(--ink);opacity:.7}
+/* place gradients */
+.g-rovinj{background:linear-gradient(160deg,#ff9a6c 0%,#ff6f7d 45%,#7a4d8f 100%)}
+.g-brijuni{background:linear-gradient(160deg,#a8e6a1 0%,#3fbf9f 55%,#177a8c 100%)}
+.g-lim{background:linear-gradient(160deg,#bff0c8 0%,#3f9f6e 55%,#134f46 100%)}
+.g-aqua{background:linear-gradient(160deg,#9ff3f7 0%,#39c6d8 50%,#0a6da0 100%)}
+.g-pula{background:linear-gradient(160deg,#ffe6b8 0%,#e8b06a 55%,#8a6a3f 100%)}
+.g-kamenjak{background:linear-gradient(160deg,#c7f2ff 0%,#3fa4d8 55%,#0b3f6e 100%)}
+.g-baredine{background:linear-gradient(160deg,#cfd8e6 0%,#7a8aa8 55%,#2c3a54 100%)}
+.g-nin{background:linear-gradient(160deg,#ffe9c4 0%,#ffd08a 45%,#5cc3e6 100%)}
+.g-laguna{background:linear-gradient(160deg,#fff3d6 0%,#a8ecf0 55%,#39c6d8 100%)}
+.g-sakarun{background:linear-gradient(160deg,#ffffff 0%,#bdf3ef 40%,#12b5c9 100%)}
+.g-zadar{background:linear-gradient(160deg,#ffd45c 0%,#ff8a5c 50%,#5a3f8f 100%)}
+.g-plitvice{background:linear-gradient(160deg,#d6f5e3 0%,#3fbf9f 50%,#0f5f6e 100%)}
+.g-paklenica{background:linear-gradient(160deg,#f0e6d6 0%,#b8a68a 50%,#4f5f6e 100%)}
+.g-budapest{background:linear-gradient(160deg,#ffe1a8 0%,#e88a6a 55%,#6e3f5f 100%)}
+
 /* ===== floating glass dock ===== */
 .dock{
   position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;
   display:flex;gap:6px;padding:8px;border-radius:100px;
+  max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none;
 }
+.dock::-webkit-scrollbar{display:none}
 .dock a{
   text-decoration:none;font-family:'Outfit',sans-serif;font-weight:700;font-size:.85rem;color:var(--ink);
   padding:11px 16px;border-radius:100px;white-space:nowrap;
@@ -224,7 +283,7 @@ footer{margin-top:70px;text-align:center;color:rgba(255,255,255,.85);font-size:.
 <header>
   <span class="eyebrow glass">🚗 Rodzinny road trip · lato 2026</span>
   <h1><span class="route">Kraków → Wiedeń → Istria</span><br>10–12 dni nad Adriatykiem</h1>
-  <p class="sub">Plan dla czterech osób (dzieci 5 i 3 lata), dojazd rozbity na dwa dni z pełnym dniem atrakcji po drodze. Kliknij atrakcję, żeby otworzyć jej stronę lub lokalizację w mapach. Na dole: wariant B z piaszczystymi plażami (Nin/Zadar).</p>
+  <p class="sub">Plan dla czterech osób (dzieci 5 i 3 lata), dojazd rozbity na dwa dni z pełnym dniem atrakcji po drodze. Kliknij atrakcję, żeby otworzyć jej stronę lub lokalizację w mapach. Na dole: wariant B z piaszczystymi plażami (Nin/Zadar) i moodboard obu wariantów.</p>
   <div class="chips">
     <span class="chip glass">🌊 parki wodne</span>
     <span class="chip glass">🦓 zoo &amp; safari</span>
@@ -409,6 +468,80 @@ footer{margin-top:70px;text-align:center;color:rgba(255,255,255,.85);font-size:.
   </a>
 </div>
 
+<h2 id="mood">Moodboard</h2>
+<p class="h2sub">Klimat obu wariantów w pigułce. Kliknij kafelek, żeby zobaczyć prawdziwe zdjęcia miejsca w Google Grafika.</p>
+
+<div class="mtabs glass" role="tablist">
+  <button type="button" class="on" data-pane="mbA">🎡 Wariant A · Istria</button>
+  <button type="button" data-pane="mbB">🏖️ Wariant B · Nin/Zadar</button>
+</div>
+
+<div class="mb-pane on" id="mbA">
+  <div class="mb">
+    <a class="tile t-l g-rovinj" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Rovinj+old+town+sunset">
+      <div class="art">🌇</div>
+      <div class="cap"><b>Rovinj o zachodzie</b><span>Pastelowe kamienice schodzące do wody, wieczorne lody w porcie</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-brijuni" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Brijuni+national+park+safari">
+      <div class="art">🦓</div>
+      <div class="cap"><b>Safari na Brijuni</b><span>Zebry i lamy na wyspie, dojazd statkiem</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-aqua" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Istralandia+aquapark">
+      <div class="art">🛝</div>
+      <div class="cap"><b>Istralandia</b><span>Dzień pełen zjeżdżalni</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-lim" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Limski+kanal+fjord+Croatia">
+      <div class="art">⛵</div>
+      <div class="cap"><b>Kanał Limski</b><span>Zielony „fiord", rejs między klifami, czasem delfiny</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-pula" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Pula+arena+amphitheatre">
+      <div class="art">🏛️</div>
+      <div class="cap"><b>Arena w Puli</b><span>Rzymskie koloseum nad morzem</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-kamenjak" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Rt+Kamenjak+beaches">
+      <div class="art">🌊</div>
+      <div class="cap"><b>Kamenjak</b><span>Dzikie zatoczki i krystaliczna woda na końcu Istrii</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-baredine" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Baredine+cave">
+      <div class="art">🦇</div>
+      <div class="cap"><b>Jaskinia Baredine</b><span>Podziemny chłód i stalaktyty</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+  </div>
+</div>
+
+<div class="mb-pane" id="mbB">
+  <div class="mb">
+    <a class="tile t-l g-nin" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Kraljicina+plaza+Nin+sandy+beach">
+      <div class="art">🏖️</div>
+      <div class="cap"><b>Kraljičina plaža</b><span>3 km piasku i laguna po kolana — królestwo zamków z piasku</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-sakarun" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Sakarun+beach+Dugi+Otok">
+      <div class="art">🚤</div>
+      <div class="cap"><b>Sakarun</b><span>Biały piasek i turkus jak na Karaibach, rejs z Zadaru</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-laguna" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Ninska+laguna+Zaton+beach">
+      <div class="art">🐚</div>
+      <div class="cap"><b>Ninska Laguna</b><span>Ciepła, płytka woda</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-zadar" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Zadar+sea+organ+sunset+greeting+to+the+sun">
+      <div class="art">🌅</div>
+      <div class="cap"><b>Zadar wieczorem</b><span>Organy morskie i świecące „Pozdrowienie Słońca"</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-l g-plitvice" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Plitvice+lakes+waterfalls">
+      <div class="art">💧</div>
+      <div class="cap"><b>Jeziora Plitwickie</b><span>Turkusowe kaskady w drodze powrotnej do domu</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-paklenica" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Paklenica+canyon">
+      <div class="art">⛰️</div>
+      <div class="cap"><b>Paklenica</b><span>Kanion pod Velebitem</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-budapest" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Aquaworld+Resort+Budapest+indoor+waterpark">
+      <div class="art">🏨</div>
+      <div class="cap"><b>Przerwa: Budapeszt</b><span>Nocleg w hotelu z krytym aquaparkiem po drodze</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+  </div>
+</div>
+
 <h2 id="plan">Ramowy plan 11 dni (wariant A)</h2>
 <p class="h2sub">Zasada: jedna „duża atrakcja" na dzień, między nimi dni plażowe. Z dziećmi 3 i 5 lat tempo jest ważniejsze niż lista. Wariant B analogicznie: 2 dni dojazd, 7 dni Nin (plaża + Sakarun + Dalmaland + Paklenica), powrót przez Plitwice.</p>
 
@@ -438,6 +571,7 @@ footer{margin-top:70px;text-align:center;color:rgba(255,255,255,.85);font-size:.
   <a href="#przerwa" data-target="przerwa">🛏️ Przerwa</a>
   <a href="#atrakcje" data-target="atrakcje">🎡 Istria</a>
   <a href="#nin" data-target="nin">🏖️ Nin</a>
+  <a href="#mood" data-target="mood">🎨 Mood</a>
   <a href="#plan" data-target="plan">📅 Plan</a>
 </nav>
 <script>
@@ -446,6 +580,15 @@ document.querySelectorAll('.dock a[data-target]').forEach(function(link){
     e.preventDefault();
     var el = document.getElementById(link.dataset.target);
     if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+document.querySelectorAll('.mtabs button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.mtabs button').forEach(function(b){ b.classList.remove('on'); });
+    document.querySelectorAll('.mb-pane').forEach(function(p){ p.classList.remove('on'); });
+    btn.classList.add('on');
+    var pane = document.getElementById(btn.dataset.pane);
+    if(pane){ pane.classList.add('on'); }
   });
 });
 </script>
