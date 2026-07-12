@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kraków → Istria · Rodzinny road trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b2233;
+  --ink-soft:rgba(11,34,51,.72);
+  --white:#ffffff;
+  --aqua:#0fb5c4;
+  --sun:#ff9d45;
+  --r-card:32px;
+  /* liquid glass recipe */
+  --lg-bg:rgba(255,255,255,.16);
+  --lg-blur:blur(9px) saturate(180%) brightness(1.08);
+  --lg-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.28),
+    inset 2px 3px 1px -2px rgba(255,255,255,.95),
+    inset -2px -2px 1px -2px rgba(255,255,255,.75),
+    inset -4px -10px 2px -8px rgba(255,255,255,.55),
+    inset 0 -1px 5px 0 rgba(10,40,60,.10),
+    0 14px 34px -8px rgba(8,40,60,.35),
+    0 3px 10px -3px rgba(8,40,60,.22);
+  --lg-shadow-hover:
+    inset 0 0 0 1px rgba(255,255,255,.4),
+    inset 2px 3px 1px -2px rgba(255,255,255,1),
+    inset -2px -2px 1px -2px rgba(255,255,255,.85),
+    inset -4px -10px 2px -8px rgba(255,255,255,.65),
+    inset 0 -1px 5px 0 rgba(10,40,60,.08),
+    0 22px 44px -8px rgba(8,40,60,.42),
+    0 5px 14px -3px rgba(8,40,60,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+  background:#8fd8e8;
+}
+a{color:inherit}
+
+/* ===== vivid living background the glass can refract ===== */
+.bgwrap{position:fixed;inset:0;z-index:0;overflow:hidden;
+  background:linear-gradient(180deg,#7fd4ec 0%,#5cc3e6 30%,#2fa9d6 55%,#1d8fc4 78%,#f4a15c 100%);}
+.blob{position:absolute;border-radius:50%;filter:blur(50px);mix-blend-mode:screen}
+.b1{width:65vmax;height:65vmax;background:radial-gradient(circle,#00e5d0 0%,rgba(0,229,208,0) 65%);top:-24vmax;right:-18vmax;animation:drift 26s ease-in-out infinite alternate}
+.b2{width:55vmax;height:55vmax;background:radial-gradient(circle,#ffb15e 0%,rgba(255,177,94,0) 62%);bottom:-20vmax;left:-14vmax;animation:drift 32s ease-in-out infinite alternate-reverse}
+.b3{width:42vmax;height:42vmax;background:radial-gradient(circle,#7ea2ff 0%,rgba(126,162,255,0) 60%);top:32%;left:48%;animation:drift 28s ease-in-out 5s infinite alternate}
+.b4{width:30vmax;height:30vmax;background:radial-gradient(circle,#ff7ea8 0%,rgba(255,126,168,0) 60%);top:60%;left:8%;animation:drift 24s ease-in-out 2s infinite alternate-reverse;opacity:.7}
+@keyframes drift{from{transform:translate(0,0) scale(1) rotate(0deg)}to{transform:translate(7vmax,-5vmax) scale(1.18) rotate(8deg)}}
+/* sun caustics */
+.caustic{position:absolute;inset:-20%;opacity:.14;mix-blend-mode:overlay;
+  background:
+   repeating-radial-gradient(circle at 30% 20%, transparent 0 60px, rgba(255,255,255,.9) 60px 62px, transparent 62px 130px),
+   repeating-radial-gradient(circle at 75% 70%, transparent 0 80px, rgba(255,255,255,.9) 80px 82px, transparent 82px 170px);
+  animation:caustic 40s linear infinite}
+@keyframes caustic{to{transform:translate(-4%,3%) rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.blob,.caustic{animation:none}}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:24px 20px 140px}
+
+/* ===== liquid glass primitives ===== */
+.glass{
+  background:var(--lg-bg);
+  backdrop-filter:var(--lg-blur);
+  -webkit-backdrop-filter:var(--lg-blur);
+  box-shadow:var(--lg-shadow);
+  border-radius:var(--r-card);
+  position:relative;
+  isolation:isolate;
+}
+/* curved specular streak — the "lens" highlight */
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(120% 60% at 12% -8%, rgba(255,255,255,.55) 0%, rgba(255,255,255,.12) 34%, transparent 55%),
+    radial-gradient(80% 40% at 88% 108%, rgba(255,255,255,.30) 0%, transparent 55%);
+  mix-blend-mode:screen;
+}
+/* edge refraction ring */
+.glass::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  padding:1.5px;
+  background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,255,255,.05) 30%,rgba(255,255,255,.05) 65%,rgba(255,255,255,.7));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:.8;
+}
+.glass>*{position:relative;z-index:2}
+
+/* ===== hero ===== */
+header{padding:56px 8px 40px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:10px 18px;border-radius:100px;margin-bottom:24px;color:var(--ink);
+}
+h1{
+  font-family:'Outfit',sans-serif;font-weight:800;
+  font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.04;letter-spacing:-.02em;
+  color:var(--white);
+  text-shadow:0 2px 20px rgba(10,60,90,.35), 0 1px 2px rgba(10,60,90,.3);
+}
+h1 .route{color:#fff}
+.sub{margin-top:18px;font-size:1.05rem;color:rgba(255,255,255,.94);max-width:580px;line-height:1.6;
+  text-shadow:0 1px 10px rgba(10,60,90,.35)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.chip{
+  padding:11px 20px;font-size:.92rem;font-weight:600;border-radius:100px;color:var(--ink);
+}
+
+h2{
+  font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);
+  letter-spacing:-.01em;margin:64px 0 8px;color:#fff;
+  text-shadow:0 2px 16px rgba(10,60,90,.35);
+  scroll-margin-top:24px;
+}
+.h2sub{color:rgba(255,255,255,.92);margin-bottom:22px;line-height:1.55;max-width:640px;
+  text-shadow:0 1px 8px rgba(10,60,90,.3)}
+
+/* ===== route buttons ===== */
+.routes{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:26px}
+.rbtn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink);
+  padding:15px 24px;border-radius:100px;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
+}
+.rbtn:hover{transform:translateY(-3px) scale(1.03);box-shadow:var(--lg-shadow-hover)}
+.rbtn:active{transform:translateY(0) scale(.97)}
+.rbtn .ico{font-size:1.15rem}
+
+/* ===== leg cards ===== */
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.route-grid{grid-template-columns:1fr}}
+.leg{padding:30px}
+.leg .tag{
+  display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+  background:rgba(255,255,255,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(10,40,60,.08);
+  padding:7px 14px;border-radius:100px;margin-bottom:16px;
+}
+.leg h3{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:6px;color:var(--ink)}
+.leg .dist{color:var(--ink);font-weight:700;font-size:.95rem;margin-bottom:12px;opacity:.85}
+.leg p{color:var(--ink-soft);line-height:1.6;font-size:.95rem}
+.leg ul{margin:12px 0 0 0;list-style:none}
+.leg li{padding:7px 0 7px 26px;position:relative;color:var(--ink-soft);font-size:.95rem;line-height:1.5}
+.leg li::before{content:"";position:absolute;left:2px;top:13px;width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff, var(--aqua));
+  box-shadow:0 1px 3px rgba(10,40,60,.3), inset 0 1px 1px rgba(255,255,255,.9)}
+.leg li.warm::before{background:radial-gradient(circle at 30% 30%, #fff, var(--sun))}
+.leg a{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:rgba(11,34,51,.3);text-underline-offset:3px}
+
+/* ===== activity cards ===== */
+.acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+a.act{
+  display:block;text-decoration:none;padding:26px;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+a.act:hover{transform:translateY(-5px) scale(1.015);box-shadow:var(--lg-shadow-hover)}
+a.act:active{transform:scale(.98)}
+a.act:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.act .cat{
+  display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 13px;border-radius:100px;margin-bottom:14px;color:var(--ink);
+  background:rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 2px rgba(10,40,60,.08);
+}
+.act h3{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:8px;color:var(--ink)}
+.act h3 .ext{font-size:.8rem;opacity:.5;margin-left:6px}
+.act p{color:var(--ink-soft);font-size:.92rem;line-height:1.55}
+.act .meta{margin-top:16px;font-size:.82rem;color:var(--ink);font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.act .go{
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.76rem;letter-spacing:.05em;
+  padding:7px 14px;border-radius:100px;white-space:nowrap;color:var(--ink);
+  background:rgba(255,255,255,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(10,40,60,.08);
+}
+
+/* ===== days ===== */
+.days{display:flex;flex-direction:column;gap:12px}
+.day{
+  display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;
+  padding:16px 22px;border-radius:24px;
+}
+.day .n{font-family:'Outfit',sans-serif;font-weight:800;font-size:1rem;color:var(--ink)}
+.day p{font-size:.95rem;color:var(--ink-soft);line-height:1.5}
+@media(max-width:560px){.day{grid-template-columns:1fr;gap:4px}}
+
+.tip{margin-top:24px;padding:22px 26px;font-size:.95rem;line-height:1.6;color:var(--ink-soft)}
+.tip strong{color:var(--ink)}
+
+/* ===== floating glass dock ===== */
+.dock{
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;
+  display:flex;gap:6px;padding:8px;border-radius:100px;
+}
+.dock a{
+  text-decoration:none;font-family:'Outfit',sans-serif;font-weight:700;font-size:.85rem;color:var(--ink);
+  padding:11px 16px;border-radius:100px;white-space:nowrap;
+  transition:background .2s ease, transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.dock a:hover{background:rgba(255,255,255,.45);transform:translateY(-2px)}
+.dock a:active{transform:scale(.94)}
+@media(max-width:560px){.dock a{padding:10px 12px;font-size:.78rem}}
+
+footer{margin-top:70px;text-align:center;color:rgba(255,255,255,.85);font-size:.85rem;text-shadow:0 1px 8px rgba(10,60,90,.3)}
+</style>
+</head>
+<body>
+<div class="bgwrap">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
+  <div class="caustic"></div>
+</div>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow glass">🚗 Rodzinny road trip · lato 2026</span>
+  <h1><span class="route">Kraków → Wiedeń → Istria</span><br>10–12 dni nad Adriatykiem</h1>
+  <p class="sub">Plan dla czterech osób (dzieci 5 i 3 lata), dojazd rozbity na dwa dni z pełnym dniem atrakcji po drodze. Kliknij atrakcję, żeby otworzyć jej stronę lub lokalizację w mapach.</p>
+  <div class="chips">
+    <span class="chip glass">🌊 parki wodne</span>
+    <span class="chip glass">🦓 zoo &amp; safari</span>
+    <span class="chip glass">🌲 natura</span>
+    <span class="chip glass">🏖️ plaże</span>
+    <span class="chip glass">⛵ rejs łódką</span>
+  </div>
+</header>
+
+<h2 id="trasa">Trasa w Google Maps</h2>
+<p class="h2sub">Gotowe nawigacje — otwierają się bezpośrednio w Google Maps ze startem w Krakowie.</p>
+<div class="routes">
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Krak%C3%B3w/Wiede%C5%84,+Austria/Pore%C4%8D,+Chorwacja"><span class="ico">🗺️</span> Cała trasa: Kraków → Wiedeń → Poreč</a>
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Krak%C3%B3w/Wiede%C5%84,+Austria"><span class="ico">1️⃣</span> Dzień 1: Kraków → Wiedeń</a>
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Wiede%C5%84,+Austria/Pore%C4%8D,+Chorwacja"><span class="ico">2️⃣</span> Dzień 2: Wiedeń → Poreč</a>
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Pore%C4%8D,+Chorwacja/Graz,+Austria/Krak%C3%B3w"><span class="ico">↩️</span> Powrót przez Graz</a>
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Pore%C4%8D,+Chorwacja/Bled,+S%C5%82owenia/Krak%C3%B3w"><span class="ico">↩️</span> Powrót przez Bled</a>
+</div>
+
+<h2 id="przerwa">Przerwa w podróży</h2>
+<p class="h2sub">Wiedeń leży niemal idealnie w połowie drogi i daje najlepszy „dzień przerwy" dla dzieci w tym wieku. Powrót można urozmaicić innym przystankiem.</p>
+
+<div class="route-grid">
+  <div class="glass leg">
+    <span class="tag">Dojazd · dzień 1–2</span>
+    <h3>Przerwa: Wiedeń</h3>
+    <div class="dist">Kraków → Wiedeń ~460 km · 4,5–5 h</div>
+    <p>Nocleg + cały dzień zwiedzania skrojony pod dzieci:</p>
+    <ul>
+      <li><a target="_blank" rel="noopener" href="https://www.zoovienna.at">Zoo Schönbrunn</a> — najstarsze zoo świata: pandy, słonie, akwarium, plac zabaw. Spokojnie zajmie 4–5 h.</li>
+      <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Irrgarten+Sch%C3%B6nbrunn+Wien">Ogrody Schönbrunn</a> — labirynt i park zabaw Irrgarten tuż obok zoo.</li>
+      <li>Wieczorem opcjonalnie <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Prater+Wien">Prater</a> — diabelski młyn i karuzele.</li>
+    </ul>
+    <p style="margin-top:14px"><strong>Dzień 2:</strong> Wiedeń → Poreč ~590 km · 5,5–6 h (przez Graz i Lublanę, autostrady cały czas).</p>
+  </div>
+
+  <div class="glass leg">
+    <span class="tag">Powrót · inne opcje przerwy</span>
+    <h3>Graz albo Bled</h3>
+    <div class="dist">Żeby nie jechać dwa razy tym samym „programem"</div>
+    <ul>
+      <li class="warm"><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Schlossberg+Slide+Graz">Graz</a> (~3 h od Istrii) — Schlossberg ze zjeżdżalnią wewnątrz skały (The Slide, 64 m!), kolejka na wzgórze, stare miasto.</li>
+      <li class="warm"><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Jezioro+Bled">Bled, Słowenia</a> (~2,5 h od Istrii) — jezioro z wyspą, tradycyjne łódki pletna, zamek na klifie, kremówka blejska.</li>
+      <li class="warm">Z Grazu do Krakowa ~5,5 h, z Bledu ~7 h — Graz wygodniejszy logistycznie.</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="atrakcje">Baza: Poreč / Rovinj (Istria)</h2>
+<p class="h2sub">Najkrótszy dojazd z Polski i największe zagęszczenie atrakcji rodzinnych w Chorwacji — wszystko poniżej w promieniu maks. 60 min jazdy. Kliknij kartę, żeby otworzyć stronę atrakcji lub mapę.</p>
+
+<div class="acts">
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.istralandia.hr">
+    <span class="cat">🌊 Park wodny</span>
+    <h3>Istralandia · Novigrad <span class="ext">↗</span></h3>
+    <p>Największy aquapark Istrii — 20+ zjeżdżalni, duża strefa brodzikowa dla maluchów, leniwa rzeka. Pełny dzień.</p>
+    <div class="meta"><span>📍 ~25 min z Poreča</span><span class="go">istralandia.hr</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Aquapark+Aquacolor+Pore%C4%8D">
+    <span class="cat">🌊 Park wodny</span>
+    <h3>Aquacolor · Poreč <span class="ext">↗</span></h3>
+    <p>Nowszy park przy Zelenej Lagunie — mniejszy, ale ze świetną strefą dla dzieci 3–6 lat. Dobry na „lżejszy" dzień.</p>
+    <div class="meta"><span>📍 na miejscu w Poreču</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.np-brijuni.hr">
+    <span class="cat">⛵ Rejs + zoo + natura</span>
+    <h3>Park Narodowy Brijuni <span class="ext">↗</span></h3>
+    <p>Rejs statkiem z Fažany, na wyspie safari park (zebry, lamy, słonie), kolejka turystyczna i odciski dinozaurów. Trzy Wasze punkty w jeden dzień.</p>
+    <div class="meta"><span>📍 ~50 min · rezerwuj rejs wcześniej</span><span class="go">np-brijuni.hr</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Limski+kanal+boat+tour+Vrsar">
+    <span class="cat">⛵ Rejs</span>
+    <h3>Kanał Limski (Lim Fjord) <span class="ext">↗</span></h3>
+    <p>Krótki rejs łodzią z Vrsaru lub Rovinja przez „fiord" — zielone klify, hodowle ostryg, często delfiny. 1,5–2 h, idealne dla 3-latka.</p>
+    <div class="meta"><span>📍 ~20 min z Poreča</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.baredine.com">
+    <span class="cat">🌲 Natura</span>
+    <h3>Jaskinia Baredine <span class="ext">↗</span></h3>
+    <p>Podziemna trasa 40 min ze stalaktytami i słynnym odmieńcem jaskiniowym („human fish"). W upał przyjemne 14°C.</p>
+    <div class="meta"><span>📍 10 min z Poreča</span><span class="go">baredine.com</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dinopark+Funtana">
+    <span class="cat">🎢 Frajda</span>
+    <h3>Dinopark Funtana <span class="ext">↗</span></h3>
+    <p>Park dinozaurów naturalnej wielkości + karuzele, mały rollercoaster i pokazy. Absolutny hit dla 5-latka.</p>
+    <div class="meta"><span>📍 15 min z Poreča</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pla%C5%BEa+Bije%C4%87a+Medulin">
+    <span class="cat">🏖️ Plaża</span>
+    <h3>Bijeca · Medulin <span class="ext">↗</span></h3>
+    <p>Rzadkość na Istrii: prawdziwa piaszczysta plaża z bardzo płytkim wejściem — 3-latek może brodzić dziesiątki metrów.</p>
+    <div class="meta"><span>📍 ~60 min · połącz z Pulą</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rt+Kamenjak+Premantura">
+    <span class="cat">🌲 Natura + plaża</span>
+    <h3>Przylądek Kamenjak <span class="ext">↗</span></h3>
+    <p>Dziki park natury na południowym cyplu — zatoczki, ścieżka dinozaurów i legendarny Safari Bar z placami zabaw z bambusa.</p>
+    <div class="meta"><span>📍 ~65 min · wjazd autem płatny</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Amfiteatr+Pula+Arena">
+    <span class="cat">🏛️ Historia w pigułce</span>
+    <h3>Amfiteatr w Puli <span class="ext">↗</span></h3>
+    <p>Rzymskie koloseum nad samym morzem — godzina zwiedzania, w sam raz na dziecięcą cierpliwość. Po drodze na Bijecę lub Kamenjak.</p>
+    <div class="meta"><span>📍 ~50 min</span><span class="go">Google Maps</span></div>
+  </a>
+</div>
+
+<h2 id="plan">Ramowy plan 11 dni</h2>
+<p class="h2sub">Zasada: jedna „duża atrakcja" na dzień, między nimi dni plażowe. Z dziećmi 3 i 5 lat tempo jest ważniejsze niż lista.</p>
+
+<div class="days">
+  <div class="glass day"><span class="n">Dzień 1</span><p>Kraków → Wiedeń (wyjazd rano), po południu Prater lub spacer, nocleg.</p></div>
+  <div class="glass day"><span class="n">Dzień 2</span><p>Zoo Schönbrunn do ~15:00, potem Wiedeń → Istria, na miejscu wieczorem. Alternatywa: zoo cały dzień, druga noc w Wiedniu i dojazd rano dnia 3.</p></div>
+  <div class="glass day"><span class="n">Dzień 3</span><p>Luz: plaża przy bazie, rozpoznanie okolicy, lody w Poreču.</p></div>
+  <div class="glass day"><span class="n">Dzień 4</span><p>Istralandia — pełny dzień w aquaparku.</p></div>
+  <div class="glass day"><span class="n">Dzień 5</span><p>Brijuni: rejs + safari park + kolejka.</p></div>
+  <div class="glass day"><span class="n">Dzień 6</span><p>Plaża + wieczorem stare miasto Rovinj (uliczki, port, kolacja).</p></div>
+  <div class="glass day"><span class="n">Dzień 7</span><p>Rano jaskinia Baredine, po południu Dinopark Funtana.</p></div>
+  <div class="glass day"><span class="n">Dzień 8</span><p>Wypad na południe: amfiteatr w Puli + plaża Bijeca w Medulinie.</p></div>
+  <div class="glass day"><span class="n">Dzień 9</span><p>Rejs po Kanale Limskim + plażowanie / Aquacolor na dobicie.</p></div>
+  <div class="glass day"><span class="n">Dzień 10</span><p>Istria → Graz (zjeżdżalnia w Schlossbergu!) lub Bled, nocleg.</p></div>
+  <div class="glass day"><span class="n">Dzień 11</span><p>Graz/Bled → Kraków, w domu wieczorem.</p></div>
+</div>
+
+<div class="glass tip">
+  <strong>Logistyka:</strong> winiety — Austria i Słowenia (e-winiety online), w Chorwacji płatne bramki. Foteliki obowiązkowe, w upały wyjazdy w trasę najlepiej ~6:00–7:00 rano — dzieci dosypiają pierwsze 2 h. Rejsy na Brijuni i Lim rezerwuj 1–2 dni wcześniej w sezonie.
+</div>
+
+<footer>Kraków → Istria · ~1050 km · plan rodzinny na 10–12 dni</footer>
+</div>
+
+<nav class="dock glass">
+  <a href="#trasa" data-target="trasa">🗺️ Trasa</a>
+  <a href="#przerwa" data-target="przerwa">🛏️ Przerwa</a>
+  <a href="#atrakcje" data-target="atrakcje">🎡 Atrakcje</a>
+  <a href="#plan" data-target="plan">📅 Plan</a>
+</nav>
+<script>
+document.querySelectorAll('.dock a[data-target]').forEach(function(link){
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    var el = document.getElementById(link.dataset.target);
+    if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+</script>
+</body>
+</html>
