@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreta · Rodzinne wakacje z autem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b2233;
+  --ink-soft:rgba(11,34,51,.72);
+  --white:#ffffff;
+  --aqua:#0fb5c4;
+  --sun:#ff9d45;
+  --r-card:32px;
+  --lg-bg:rgba(255,255,255,.16);
+  --lg-blur:blur(9px) saturate(180%) brightness(1.08);
+  --lg-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.28),
+    inset 2px 3px 1px -2px rgba(255,255,255,.95),
+    inset -2px -2px 1px -2px rgba(255,255,255,.75),
+    inset -4px -10px 2px -8px rgba(255,255,255,.55),
+    inset 0 -1px 5px 0 rgba(10,40,60,.10),
+    0 14px 34px -8px rgba(8,40,60,.35),
+    0 3px 10px -3px rgba(8,40,60,.22);
+  --lg-shadow-hover:
+    inset 0 0 0 1px rgba(255,255,255,.4),
+    inset 2px 3px 1px -2px rgba(255,255,255,1),
+    inset -2px -2px 1px -2px rgba(255,255,255,.85),
+    inset -4px -10px 2px -8px rgba(255,255,255,.65),
+    inset 0 -1px 5px 0 rgba(10,40,60,.08),
+    0 22px 44px -8px rgba(8,40,60,.42),
+    0 5px 14px -3px rgba(8,40,60,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+  background:#8fd0e8;
+}
+a{color:inherit}
+.bgwrap{position:fixed;inset:0;z-index:0;overflow:hidden;
+  background:linear-gradient(180deg,#6ec6ea 0%,#3ba9dd 30%,#1e7fc4 55%,#155f9e 78%,#f4c05c 100%);}
+.blob{position:absolute;border-radius:50%;filter:blur(50px);mix-blend-mode:screen}
+.b1{width:65vmax;height:65vmax;background:radial-gradient(circle,#37e0d8 0%,rgba(55,224,216,0) 65%);top:-24vmax;right:-18vmax;animation:drift 26s ease-in-out infinite alternate}
+.b2{width:55vmax;height:55vmax;background:radial-gradient(circle,#ffd15e 0%,rgba(255,209,94,0) 62%);bottom:-20vmax;left:-14vmax;animation:drift 32s ease-in-out infinite alternate-reverse}
+.b3{width:42vmax;height:42vmax;background:radial-gradient(circle,#ff9a8a 0%,rgba(255,154,138,0) 60%);top:32%;left:48%;animation:drift 28s ease-in-out 5s infinite alternate;opacity:.8}
+.b4{width:30vmax;height:30vmax;background:radial-gradient(circle,#b48aff 0%,rgba(180,138,255,0) 60%);top:60%;left:8%;animation:drift 24s ease-in-out 2s infinite alternate-reverse;opacity:.55}
+@keyframes drift{from{transform:translate(0,0) scale(1) rotate(0deg)}to{transform:translate(7vmax,-5vmax) scale(1.18) rotate(8deg)}}
+.caustic{position:absolute;inset:-20%;opacity:.14;mix-blend-mode:overlay;
+  background:
+   repeating-radial-gradient(circle at 30% 20%, transparent 0 60px, rgba(255,255,255,.9) 60px 62px, transparent 62px 130px),
+   repeating-radial-gradient(circle at 75% 70%, transparent 0 80px, rgba(255,255,255,.9) 80px 82px, transparent 82px 170px);
+  animation:caustic 40s linear infinite}
+@keyframes caustic{to{transform:translate(-4%,3%) rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.blob,.caustic{animation:none}}
+
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:24px 20px 140px}
+
+.glass{
+  background:var(--lg-bg);
+  backdrop-filter:var(--lg-blur);
+  -webkit-backdrop-filter:var(--lg-blur);
+  box-shadow:var(--lg-shadow);
+  border-radius:var(--r-card);
+  position:relative;
+  isolation:isolate;
+}
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(120% 60% at 12% -8%, rgba(255,255,255,.55) 0%, rgba(255,255,255,.12) 34%, transparent 55%),
+    radial-gradient(80% 40% at 88% 108%, rgba(255,255,255,.30) 0%, transparent 55%);
+  mix-blend-mode:screen;
+}
+.glass::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  padding:1.5px;
+  background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,255,255,.05) 30%,rgba(255,255,255,.05) 65%,rgba(255,255,255,.7));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:.8;
+}
+.glass>*{position:relative;z-index:2}
+
+header{padding:56px 8px 40px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:10px 18px;border-radius:100px;margin-bottom:24px;color:var(--ink);
+}
+h1{
+  font-family:'Outfit',sans-serif;font-weight:800;
+  font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.04;letter-spacing:-.02em;
+  color:var(--white);
+  text-shadow:0 2px 20px rgba(10,60,90,.35), 0 1px 2px rgba(10,60,90,.3);
+}
+.sub{margin-top:18px;font-size:1.05rem;color:rgba(255,255,255,.94);max-width:600px;line-height:1.6;
+  text-shadow:0 1px 10px rgba(10,60,90,.35)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.chip{padding:11px 20px;font-size:.92rem;font-weight:600;border-radius:100px;color:var(--ink)}
+
+h2{
+  font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);
+  letter-spacing:-.01em;margin:64px 0 8px;color:#fff;
+  text-shadow:0 2px 16px rgba(10,60,90,.35);
+  scroll-margin-top:24px;
+}
+.h2sub{color:rgba(255,255,255,.92);margin-bottom:22px;line-height:1.55;max-width:660px;
+  text-shadow:0 1px 8px rgba(10,60,90,.3)}
+
+.routes{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:26px}
+.rbtn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink);
+  padding:15px 24px;border-radius:100px;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
+}
+.rbtn:hover{transform:translateY(-3px) scale(1.03);box-shadow:var(--lg-shadow-hover)}
+.rbtn:active{transform:translateY(0) scale(.97)}
+.rbtn .ico{font-size:1.15rem}
+
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:760px){.route-grid{grid-template-columns:1fr}}
+.leg{padding:30px}
+.leg .tag{
+  display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+  background:rgba(255,255,255,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(10,40,60,.08);
+  padding:7px 14px;border-radius:100px;margin-bottom:16px;
+}
+.leg h3{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:6px;color:var(--ink)}
+.leg .dist{color:var(--ink);font-weight:700;font-size:.95rem;margin-bottom:12px;opacity:.85}
+.leg p{color:var(--ink-soft);line-height:1.6;font-size:.95rem}
+.leg ul{margin:12px 0 0 0;list-style:none}
+.leg li{padding:7px 0 7px 26px;position:relative;color:var(--ink-soft);font-size:.95rem;line-height:1.5}
+.leg li::before{content:"";position:absolute;left:2px;top:13px;width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff, var(--aqua));
+  box-shadow:0 1px 3px rgba(10,40,60,.3), inset 0 1px 1px rgba(255,255,255,.9)}
+.leg li.warm::before{background:radial-gradient(circle at 30% 30%, #fff, var(--sun))}
+.leg a{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:rgba(11,34,51,.3);text-underline-offset:3px}
+
+.acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+a.act{
+  display:block;text-decoration:none;padding:26px;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+a.act:hover{transform:translateY(-5px) scale(1.015);box-shadow:var(--lg-shadow-hover)}
+a.act:active{transform:scale(.98)}
+a.act:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.act .cat{
+  display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 13px;border-radius:100px;margin-bottom:14px;color:var(--ink);
+  background:rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 2px rgba(10,40,60,.08);
+}
+.act h3{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:8px;color:var(--ink)}
+.act h3 .ext{font-size:.8rem;opacity:.5;margin-left:6px}
+.act p{color:var(--ink-soft);font-size:.92rem;line-height:1.55}
+.act .meta{margin-top:16px;font-size:.82rem;color:var(--ink);font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.act .go{
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.76rem;letter-spacing:.05em;
+  padding:7px 14px;border-radius:100px;white-space:nowrap;color:var(--ink);
+  background:rgba(255,255,255,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 2px rgba(10,40,60,.08);
+}
+
+.days{display:flex;flex-direction:column;gap:12px}
+.day{
+  display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;
+  padding:16px 22px;border-radius:24px;
+}
+.day .n{font-family:'Outfit',sans-serif;font-weight:800;font-size:1rem;color:var(--ink)}
+.day p{font-size:.95rem;color:var(--ink-soft);line-height:1.5}
+@media(max-width:560px){.day{grid-template-columns:1fr;gap:4px}}
+
+.tip{margin-top:24px;padding:22px 26px;font-size:.95rem;line-height:1.6;color:var(--ink-soft)}
+.tip strong{color:var(--ink)}
+
+/* moodboard */
+.mtabs{display:inline-flex;gap:6px;padding:7px;border-radius:100px;margin-bottom:24px}
+.mtabs button{
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.92rem;color:var(--ink);
+  padding:11px 22px;border-radius:100px;border:0;background:transparent;cursor:pointer;
+  transition:background .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.mtabs button:hover{transform:translateY(-1px)}
+.mtabs button.on{
+  background:rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 2px rgba(10,40,60,.08);
+}
+.mb{columns:3;column-gap:16px}
+@media(max-width:860px){.mb{columns:2}}
+@media(max-width:480px){.mb{columns:2;column-gap:12px}}
+.mb-pane{display:none}
+.mb-pane.on{display:block}
+.tile{
+  display:block;text-decoration:none;break-inside:avoid;margin-bottom:16px;
+  border-radius:26px;overflow:hidden;position:relative;
+  box-shadow:0 14px 30px rgba(8,40,60,.3), inset 0 1px 0 rgba(255,255,255,.4);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+.tile:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 22px 44px rgba(8,40,60,.42)}
+.tile .art{display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.tile .art::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 60% at 15% 0%, rgba(255,255,255,.4) 0%, transparent 50%);}
+.t-s .art{height:140px}
+.t-m .art{height:195px}
+.t-l .art{height:250px}
+.tile .cap{
+  position:absolute;left:10px;right:10px;bottom:10px;
+  padding:10px 14px;border-radius:18px;
+  background:rgba(255,255,255,.30);
+  backdrop-filter:blur(12px) saturate(160%);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 0 0 1px rgba(255,255,255,.2);
+}
+.tile .cap b{display:block;font-family:'Outfit',sans-serif;font-weight:800;font-size:.92rem;color:var(--ink)}
+.tile .cap span{font-size:.76rem;color:var(--ink-soft);line-height:1.35;display:block;margin-top:2px}
+.tile .cap em{font-style:normal;font-size:.7rem;font-weight:700;color:var(--ink);opacity:.7}
+.g-elafonisi{background:linear-gradient(160deg,#ffd9e8 0%,#ff9ec4 40%,#28b5d8 100%)}
+.g-balos{background:linear-gradient(160deg,#e8fbff 0%,#5fd8e8 45%,#0a6da0 100%)}
+.g-falassarna{background:linear-gradient(160deg,#ffe9c4 0%,#ffb86a 45%,#2fa9d6 100%)}
+.g-chania{background:linear-gradient(160deg,#ffd45c 0%,#ff8a5c 50%,#5a3f8f 100%)}
+.g-aquapark{background:linear-gradient(160deg,#9ff3f7 0%,#39c6d8 50%,#0a6da0 100%)}
+.g-kournas{background:linear-gradient(160deg,#d6f5e3 0%,#3fbf9f 50%,#0f5f6e 100%)}
+.g-knossos{background:linear-gradient(160deg,#ffe6b8 0%,#e8975a 55%,#8a4a3f 100%)}
+.g-aquarium{background:linear-gradient(160deg,#c7f2ff 0%,#3fa4d8 55%,#0b2f6e 100%)}
+.g-frango{background:linear-gradient(160deg,#fff3d6 0%,#e8c06a 50%,#2f9fd6 100%)}
+.g-rethymno{background:linear-gradient(160deg,#ffb9a8 0%,#e87a8a 50%,#4a3f8f 100%)}
+.g-botanic{background:linear-gradient(160deg,#eaf7c8 0%,#8fce6a 50%,#2f6e4a 100%)}
+.g-pirate{background:linear-gradient(160deg,#cfd8e6 0%,#6a8aa8 55%,#1c2a44 100%)}
+
+.dock{
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;
+  display:flex;gap:6px;padding:8px;border-radius:100px;
+  max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none;
+}
+.dock::-webkit-scrollbar{display:none}
+.dock a{
+  text-decoration:none;font-family:'Outfit',sans-serif;font-weight:700;font-size:.85rem;color:var(--ink);
+  padding:11px 16px;border-radius:100px;white-space:nowrap;
+  transition:background .2s ease, transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.dock a:hover{background:rgba(255,255,255,.45);transform:translateY(-2px)}
+.dock a:active{transform:scale(.94)}
+@media(max-width:560px){.dock a{padding:10px 12px;font-size:.78rem}}
+
+footer{margin-top:70px;text-align:center;color:rgba(255,255,255,.85);font-size:.85rem;text-shadow:0 1px 8px rgba(10,60,90,.3)}
+</style>
+</head>
+<body>
+<div class="bgwrap">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
+  <div class="caustic"></div>
+</div>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow glass">✈️ Rodzinne wakacje · lato 2026</span>
+  <h1>Kreta<br>10–12 dni z autem</h1>
+  <p class="sub">Plan dla czterech osób (dzieci 5 i 3 lata): lot z Polski, wynajęty samochód, dom/apartament jako baza. Więcej atrakcji niż dni — wybieracie na bieżąco. Kliknij atrakcję, żeby otworzyć jej stronę lub lokalizację w mapach.</p>
+  <div class="chips">
+    <span class="chip glass">🌊 parki wodne</span>
+    <span class="chip glass">🐠 akwarium</span>
+    <span class="chip glass">🌲 natura</span>
+    <span class="chip glass">🏖️ piaszczyste plaże</span>
+    <span class="chip glass">⛵ rejs łódką</span>
+  </div>
+</header>
+
+<h2 id="logistyka">Logistyka: lot, auto, baza</h2>
+<p class="h2sub">Dwa lotniska do wyboru, auto odbieracie na lotnisku. Baza w okolicy Rethymno = środek północnego wybrzeża: wszystko na wyspie w zasięgu 1–1,5 h.</p>
+<div class="routes">
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Lotnisko+Chania/Rethymno,+Grecja"><span class="ico">🛬</span> Lotnisko Chania → Rethymno (~1 h)</a>
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Lotnisko+Heraklion/Rethymno,+Grecja"><span class="ico">🛬</span> Lotnisko Heraklion → Rethymno (~1 h)</a>
+  <a class="rbtn glass" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rethymno+Kreta"><span class="ico">🏠</span> Baza: Rethymno na mapie</a>
+</div>
+
+<div class="route-grid">
+  <div class="glass leg">
+    <span class="tag">Auto z wypożyczalni</span>
+    <h3>Na co uważać</h3>
+    <div class="dist">Rezerwuj z wyprzedzeniem — sierpień to szczyt</div>
+    <ul>
+      <li>Dwa foteliki zamów razem z autem przy rezerwacji — na miejscu może ich nie być.</li>
+      <li>Pełne ubezpieczenie bez udziału własnego (FDW) — kreteńskie parkingi i wąskie uliczki robią swoje.</li>
+      <li>Kompakt/SUV klasy B-C wystarczy; na drogi do Elafonisi i Balos nie potrzeba terenówki (na sam parking Balos droga szutrowa — sprawdź, czy umowa jej nie wyklucza; alternatywą jest rejs).</li>
+      <li>Lokalne wypożyczalnie (nie tylko sieciówki) często tańsze i uczciwsze — sprawdzaj oceny.</li>
+    </ul>
+  </div>
+  <div class="glass leg">
+    <span class="tag">Baza · Rethymno i okolice</span>
+    <h3>Dlaczego tu</h3>
+    <div class="dist">Środek wyspy = najkrótsze dojazdy we wszystkie strony</div>
+    <ul>
+      <li class="warm">Pod domem ~12 km piaszczystej plaży miejskiej z łagodnym wejściem.</li>
+      <li class="warm">Weneckie stare miasto z fortecą na wieczorne spacery i tawerny.</li>
+      <li class="warm">Zachód (Chania, Elafonisi, Balos) i wschód (Heraklion, akwarium, aquaparki) w zasięgu 1–1,5 h.</li>
+      <li class="warm">Duży wybór domów i apartamentów 60 m²+ z basenem w okolicznych miejscowościach (Adele, Platanias, Episkopi).</li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="atrakcje">Atrakcje — więcej niż dni</h2>
+<p class="h2sub">14 opcji na 7–8 dni na miejscu: wybieracie według pogody i humorów. Kliknij kartę, żeby otworzyć stronę lub mapę.</p>
+
+<div class="acts">
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Elafonisi+beach">
+    <span class="cat">🏖️ Plaża legenda</span>
+    <h3>Elafonisi <span class="ext">↗</span></h3>
+    <p>Różowy piasek i płytka laguna, po której 3-latek brodzi setki metrów. Jedź na rano (przed 10) albo po 16 — w środku dnia tłok.</p>
+    <div class="meta"><span>📍 ~2 h z Rethymno</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Balos+Gramvousa+cruise+Kissamos">
+    <span class="cat">⛵ Rejs + plaża</span>
+    <h3>Rejs na Balos i Gramvousę <span class="ext">↗</span></h3>
+    <p>Statek z portu Kissamos: piracka wyspa z zamkiem + biało-turkusowa laguna Balos. Rejs i plaża marzeń w jednym dniu — punkt „rejs" zaliczony w wielkim stylu.</p>
+    <div class="meta"><span>📍 port Kissamos ~1,5 h</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Falassarna+beach">
+    <span class="cat">🏖️ Plaża</span>
+    <h3>Falassarna <span class="ext">↗</span></h3>
+    <p>Szeroka, długa piaszczysta plaża z widokiem na zachód słońca. Mniej „instagramowa" niż Elafonisi = mniej ludzi.</p>
+    <div class="meta"><span>📍 ~1 h 45 min</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rethymno+beach">
+    <span class="cat">🏖️ Plaża pod domem</span>
+    <h3>Plaża Rethymno <span class="ext">↗</span></h3>
+    <p>~12 km piasku zaczynające się przy starym mieście. Na co dzień, bez wsiadania do auta. Przy północnym wietrze bywają fale — wtedy dzień na basen lub południe wyspy.</p>
+    <div class="meta"><span>📍 baza na miejscu</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Limnoupolis+Water+Park+Chania">
+    <span class="cat">🌊 Park wodny</span>
+    <h3>Limnoupolis · Chania <span class="ext">↗</span></h3>
+    <p>Aquapark w zieleni pod Chanią: leniwa rzeka, zjeżdżalnie rodzinne, brodziki. Idealne łączenie z wieczorem w Chanii.</p>
+    <div class="meta"><span>📍 ~1 h</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Acqua+Plus+Water+Park+Hersonissos">
+    <span class="cat">🌊 Park wodny</span>
+    <h3>Acqua Plus · Hersonissos <span class="ext">↗</span></h3>
+    <p>Największy aquapark Krety, wbudowany w zbocze wzgórza — kilkadziesiąt zjeżdżalni i duża strefa dziecięca. Pełny dzień.</p>
+    <div class="meta"><span>📍 ~1 h 20 min</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Watercity+Waterpark+Anopolis+Crete">
+    <span class="cat">🌊 Park wodny</span>
+    <h3>Watercity · Anopolis <span class="ext">↗</span></h3>
+    <p>Trzeci duży aquapark — rezerwowy wariant, gdyby dzieci zażądały jeszcze jednego dnia na zjeżdżalniach.</p>
+    <div class="meta"><span>📍 ~1 h 15 min</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://cretaquarium.gr">
+    <span class="cat">🐠 Akwarium</span>
+    <h3>Cretaquarium · Gournes <span class="ext">↗</span></h3>
+    <p>Jedno z największych akwariów w Europie — rekiny, meduzy, żółwie. Klimatyzacja = idealny plan na najgorętszy dzień. Punkt „zoo" z listy w wersji morskiej.</p>
+    <div class="meta"><span>📍 ~1 h 10 min</span><span class="go">cretaquarium.gr</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Jezioro+Kournas+Kreta">
+    <span class="cat">🌲 Natura</span>
+    <h3>Jezioro Kournas <span class="ext">↗</span></h3>
+    <p>Jedyne słodkowodne jezioro Krety: rowerki wodne, żółwie przy brzegu, płytka woda, tawerny z widokiem. Maluchy to uwielbiają.</p>
+    <div class="meta"><span>📍 ~25 min</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Botanical+Park+and+Gardens+of+Crete">
+    <span class="cat">🌲 Natura</span>
+    <h3>Park Botaniczny Krety <span class="ext">↗</span></h3>
+    <p>Ogrody w kraterze pod Chanią: ścieżka wśród drzew owocowych, pawie i zwierzaki po drodze, na końcu świetna tawerna z produktami z ogrodu.</p>
+    <div class="meta"><span>📍 ~1 h 10 min</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Knossos+palace">
+    <span class="cat">🏛️ Historia w pigułce</span>
+    <h3>Knossos <span class="ext">↗</span></h3>
+    <p>Pałac Minotaura — 5-latkowi opowiadasz mit o labiryncie i zwiedzanie robi się przygodą. Idź na samo otwarcie (8:00), przed upałem i tłumem. Bilety online.</p>
+    <div class="meta"><span>📍 ~1 h 15 min · połącz z akwarium</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Frangokastello+beach">
+    <span class="cat">🏖️ Plaża + zamek</span>
+    <h3>Frangokastello <span class="ext">↗</span></h3>
+    <p>Południowe wybrzeże: wenecki zamek nad piaszczystą plażą z bardzo płytką, ciepłą wodą. Ratunek, gdy na północy wieje — na południu wtedy spokój.</p>
+    <div class="meta"><span>📍 ~1 h 10 min przez góry</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Stary+port+wenecki+Chania">
+    <span class="cat">🌇 Wieczór</span>
+    <h3>Chania · port wenecki <span class="ext">↗</span></h3>
+    <p>Najładniejsze miasto Krety: spacer po porcie do latarni, uliczki, kolacja w tawernie. Idealne po dniu w Limnoupolis.</p>
+    <div class="meta"><span>📍 ~1 h</span><span class="go">Google Maps</span></div>
+  </a>
+  <a class="glass act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=pirate+boat+trip+Rethymno">
+    <span class="cat">⛵ Rejs</span>
+    <h3>Rejs piracki z Rethymno <span class="ext">↗</span></h3>
+    <p>Krótki rejs „pirackim" statkiem wzdłuż wybrzeża z postojem na kąpiel — wersja mini rejsu prosto z portu pod domem, w sam raz dla 3-latka.</p>
+    <div class="meta"><span>📍 port Rethymno</span><span class="go">Google Maps</span></div>
+  </a>
+</div>
+
+<h2 id="mood">Moodboard</h2>
+<p class="h2sub">Klimat wyspy w pigułce. Kliknij kafelek, żeby zobaczyć prawdziwe zdjęcia miejsca w Google Grafika.</p>
+
+<div class="mtabs glass" role="tablist">
+  <button type="button" class="on" data-pane="mbA">🏖️ Plaże i morze</button>
+  <button type="button" data-pane="mbB">🎡 Atrakcje i miasta</button>
+</div>
+
+<div class="mb-pane on" id="mbA">
+  <div class="mb">
+    <a class="tile t-l g-elafonisi" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Elafonisi+beach+pink+sand">
+      <div class="art">🩷</div>
+      <div class="cap"><b>Elafonisi</b><span>Różowy piasek i laguna po kostki — plaża z innej planety</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-balos" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Balos+lagoon+Crete">
+      <div class="art">⛵</div>
+      <div class="cap"><b>Laguna Balos</b><span>Biel i turkus, dopłynięcie statkiem z Kissamos</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-falassarna" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Falassarna+beach+sunset">
+      <div class="art">🌅</div>
+      <div class="cap"><b>Falassarna</b><span>Szeroki piasek i zachody słońca</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-frango" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Frangokastello+beach+castle">
+      <div class="art">🏰</div>
+      <div class="cap"><b>Frangokastello</b><span>Zamek nad płytką, ciepłą wodą południa</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-kournas" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Kournas+lake+Crete+pedal+boats">
+      <div class="art">🦆</div>
+      <div class="cap"><b>Jezioro Kournas</b><span>Rowerki wodne i żółwie</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-pirate" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=pirate+ship+boat+trip+Rethymno">
+      <div class="art">🏴‍☠️</div>
+      <div class="cap"><b>Rejs piracki</b><span>Statek z portu w Rethymno, postój na kąpiel</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+  </div>
+</div>
+
+<div class="mb-pane" id="mbB">
+  <div class="mb">
+    <a class="tile t-l g-chania" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Chania+old+venetian+harbour+evening">
+      <div class="art">🌇</div>
+      <div class="cap"><b>Chania wieczorem</b><span>Wenecki port, latarnia i tawerny nad wodą</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-aquapark" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Acqua+Plus+water+park+Crete">
+      <div class="art">🛝</div>
+      <div class="cap"><b>Acqua Plus</b><span>Największy aquapark wyspy, wbudowany w zbocze</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-aquarium" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Cretaquarium+Crete">
+      <div class="art">🦈</div>
+      <div class="cap"><b>Cretaquarium</b><span>Rekiny i meduzy w klimie</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-knossos" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Knossos+palace+Crete">
+      <div class="art">🏛️</div>
+      <div class="cap"><b>Knossos</b><span>Pałac Minotaura — mit, który 5-latek kupi w całości</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-s g-botanic" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Botanical+Park+of+Crete">
+      <div class="art">🦚</div>
+      <div class="cap"><b>Park Botaniczny</b><span>Ogrody w kraterze i pawie</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+    <a class="tile t-m g-rethymno" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=Rethymno+old+town+fortezza">
+      <div class="art">🏘️</div>
+      <div class="cap"><b>Rethymno</b><span>Wasza baza: stare miasto, forteca i 12 km plaży</span><em>📸 zobacz zdjęcia</em></div>
+    </a>
+  </div>
+</div>
+
+<h2 id="plan">Ramowy plan 11 dni</h2>
+<p class="h2sub">Jedna „duża atrakcja" na dzień, między nimi plaża i basen przy domu. Kolejność dowolna — atrakcji jest więcej niż dni, więc coś wypadnie i dobrze.</p>
+
+<div class="days">
+  <div class="glass day"><span class="n">Dzień 1</span><p>Lot + odbiór auta + zakwaterowanie. Wieczorem pierwsza kolacja w tawernie w Rethymno.</p></div>
+  <div class="glass day"><span class="n">Dzień 2</span><p>Luz: plaża pod domem, basen, rozpoznanie okolicy.</p></div>
+  <div class="glass day"><span class="n">Dzień 3</span><p>Rejs na Balos i Gramvousę (wcześnie do Kissamos, statek rezerwuj dzień-dwa wcześniej).</p></div>
+  <div class="glass day"><span class="n">Dzień 4</span><p>Jezioro Kournas (rowerki wodne, żółwie) + popołudnie na plaży.</p></div>
+  <div class="glass day"><span class="n">Dzień 5</span><p>Limnoupolis aquapark, wieczorem port wenecki w Chanii.</p></div>
+  <div class="glass day"><span class="n">Dzień 6</span><p>Luz plażowy. Alternatywnie przy wietrze: Frangokastello na południu.</p></div>
+  <div class="glass day"><span class="n">Dzień 7</span><p>Elafonisi — wyjazd rano, po drodze powrotnej opcjonalnie Falassarna na zachód słońca.</p></div>
+  <div class="glass day"><span class="n">Dzień 8</span><p>Wschód: Knossos na otwarcie (8:00), potem Cretaquarium w klimatyzacji.</p></div>
+  <div class="glass day"><span class="n">Dzień 9</span><p>Acqua Plus — pełny dzień w największym aquaparku wyspy.</p></div>
+  <div class="glass day"><span class="n">Dzień 10</span><p>Rejs piracki z Rethymno + plaża + pożegnalna kolacja na starym mieście.</p></div>
+  <div class="glass day"><span class="n">Dzień 11</span><p>Basen/plaża do południa, zdanie auta, wylot.</p></div>
+</div>
+
+<div class="glass tip">
+  <strong>Logistyka:</strong> sierpień = 30–35°C, plaża rano i po 16:00, środek dnia na basen/akwarium/sjestę. Meltemi (północny wiatr) robi fale na północnych plażach — wtedy jedźcie na południe (Frangokastello) albo do aquaparku. Tawerny: kolacja dla 4 osób realnie 40–60 EUR, dzieci wszędzie mile widziane, do rachunku często gratis owoce i raki. Knossos i rejsy rezerwuj online z wyprzedzeniem. Woda w morzu na początku sierpnia ~25°C.
+</div>
+
+<footer>Kreta · baza Rethymno · lot + auto z wypożyczalni · plan rodzinny na 10–12 dni · 14 atrakcji na 7–8 dni</footer>
+</div>
+
+<nav class="dock glass">
+  <a href="#logistyka" data-target="logistyka">✈️ Logistyka</a>
+  <a href="#atrakcje" data-target="atrakcje">🎡 Atrakcje</a>
+  <a href="#mood" data-target="mood">🎨 Mood</a>
+  <a href="#plan" data-target="plan">📅 Plan</a>
+</nav>
+<script>
+document.querySelectorAll('.dock a[data-target]').forEach(function(link){
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    var el = document.getElementById(link.dataset.target);
+    if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+document.querySelectorAll('.mtabs button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.mtabs button').forEach(function(b){ b.classList.remove('on'); });
+    document.querySelectorAll('.mb-pane').forEach(function(p){ p.classList.remove('on'); });
+    btn.classList.add('on');
+    var pane = document.getElementById(btn.dataset.pane);
+    if(pane){ pane.classList.add('on'); }
+  });
+});
+</script>
+</body>
+</html>
